@@ -82,7 +82,16 @@ public class IntList {
 
     public static IntList dcatenate(IntList A, IntList B) {
         //TODO:  fill in method
-        return null;
+        if(A == null) {
+            A = B;
+            return A;
+        }
+        IntList last_list = A;
+        while(last_list.rest != null) {
+            last_list = last_list.rest;
+        }
+        last_list.rest = B;
+        return A;
     }
 
     /**
@@ -91,7 +100,31 @@ public class IntList {
      */
     public static IntList catenate(IntList A, IntList B) {
         //TODO:  fill in method
-        return null;
+        if(A == null) {
+            return B;
+        }
+        IntList res = new IntList(A.first, null);
+        IntList ptr = res;
+        while(A.rest != null) {
+            A = A.rest;
+            ptr.rest = new IntList(A.first, null);
+            ptr = ptr.rest;
+        }
+        if(B == null) {
+            return res;
+        }
+        ptr.rest = new IntList(B.first, null);
+        while(B.rest != null) {
+            B = B.rest;
+            ptr = ptr.rest;
+            ptr.rest = new IntList(B.first, null);
+        }
+        /**
+         * Another recursive solution
+         * Author: FlyingPig
+         */
+
+        return res;
     }
 
 
