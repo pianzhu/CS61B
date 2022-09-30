@@ -119,12 +119,19 @@ public class IntList {
             ptr = ptr.rest;
             ptr.rest = new IntList(B.first, null);
         }
+        return res;
         /**
          * Another recursive solution
-         * Author: FlyingPig
+         *
+         * if(A == null) {
+         *             return B;
+         *         }
+         *         if(A.rest == null) {
+         *             return new IntList(A.first, B);
+         *         }
+         *         return new IntList(A.first, catenate(A.rest, B));
+         *
          */
-
-        return res;
     }
 
 
