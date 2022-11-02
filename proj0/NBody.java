@@ -1,12 +1,12 @@
 public class NBody {
-	public static double readRadius(String file_name) {
-		In in = new In(file_name);
+	public static double readRadius(String filename) {
+		In in = new In(filename);
 		int n = in.readInt();
 		double radius = in.readDouble();
 		return radius;
 	}
-	public static Planet[] readPlanets(String file_name) {
-		In in = new In(file_name);
+	public static Planet[] readPlanets(String filename) {
+		In in = new In(filename);
 		int n = in.readInt();
 		double radius = in.readDouble();
 		Planet[] planets = new Planet[n];
@@ -31,10 +31,10 @@ public class NBody {
 		int t = 0;
 		StdDraw.setXscale(-r, r);
 		StdDraw.setYscale(-r, r);
+		StdDraw.enableDoubleBuffering();
 		int n = planets.length;
 		StdDraw.picture(0, 0, "images/starfield.jpg");
 		while (t <= T) {
-			StdDraw.enableDoubleBuffering();
 			double[] xForces = new double[n];
 			double[] yForces = new double[n];
 			for (int i = 0; i < n; i++) {
@@ -53,7 +53,7 @@ public class NBody {
 			t += dt;
 		}
 		StdOut.printf("%d\n", planets.length);
-		StdOut.printf("%.2e\n", radius);
+		StdOut.printf("%.2e\n", r);
 		for (int i = 0; i < planets.length; i++) {
 			StdOut.printf("%11.4e %11.4e %11.4e %11.4e %11.4e %12s\n",
 			              planets[i].xxPos, planets[i].yyPos, planets[i].xxVel,

@@ -22,8 +22,8 @@ public class Planet {
 		imgFileName = p.imgFileName;
 	}
 	public double calcDistance(Planet p) {
-		double x = Math.abs(p.xxPos - xxPos);
-		double y = Math.abs(p.yyPos - yyPos);
+		double x = p.xxPos - xxPos;
+		double y = p.yyPos - yyPos;
 		return Math.sqrt(x * x + y * y);
 		// return Math.sqrt(Math.pow(p.xxPos - xxPos, 2) + Math.pow(p.yyPos - yyPos, 2));
 	}
