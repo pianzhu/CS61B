@@ -22,8 +22,8 @@ public class NBody {
 		return planets;
 	}
 	public static void main(String[] args) {
-		double T = new Double(args[0]);
-		double dt = new Double(args[1]);
+		double T = new Double.valueOf(args[0]);
+		double dt = new Double.valueOf(args[1]);
 		String filename = args[2];
 		double r = NBody.readRadius(filename);
 		Planet[] planets = NBody.readPlanets(filename);
