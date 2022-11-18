@@ -11,25 +11,69 @@ public class ArrayDeque<T> {
         tail = 0;
         length = 8;
     }
+
+    private void resizeUp() {
+        T[] newArray = (T[]) new Object[length * 2];
+        int ptr1 = head;
+        int ptr2 = length;
+        while (ptr1 != tail) {
+            newArray[ptr2] = value[ptr1];
+            ptr1++;
+            if (ptr1 == length) {
+                ptr1 = 0;
+            }
+            ptr2++;
+            if (ptr2 == length) {
+                ptr2 = 0;
+            }
+        }
+        head = length;
+        tail = ptr2;
+        value = newArray;
+        length *= 2;
+    }
+
+    private void resizeDown() {
+        T[] newArray = (T[]) new Object[length / 2];
+        int ptr1 = head;
+        int ptr2 = length / 4;
+        while (ptr1 != tail) {
+            newArray[ptr2] = value[ptr1];
+            ptr1++;
+            if (ptr1 == length) {
+                ptr1 = 0;
+            }
+            ptr2++;
+            if (ptr2 == length / 2) {
+                ptr2 = 0;
+            }
+        }
+        head = length / 4;
+        tail = ptr2;
+        value = newArray;
+        length /= 2;
+    }
     public void addFirst(T item) {
-        if (ssize > length) {
-            return;
+        if (ssize == length - 1) {
+            resizeUp();
         }
         head--;
         if (head < 0) {
-            head = 7;
+            head = length - 1;
         }
         value[head] = item;
         ssize++;
     }
     public void addLast(T item) {
-        if (ssize > length) {
-            return;
+        if (ssize == length - 1) {
+            resizeUp();
         }
         value[tail] = item;
-        tail++;
-        if (tail >= 8) {
+        if (tail + 1 == length) {
             tail = 0;
+        }
+        else {
+            tail++;
         }
         ssize++;
     }
@@ -44,28 +88,39 @@ public class ArrayDeque<T> {
         while (node != tail) {
             System.out.print(value[node] + " ");
             node++;
-            if (node >= 8) {
+            if (node == length) {
                 node = 0;
             }
         }
     }
     public T removeFirst() {
+        if (length >= 16 && length / ssize >= 4) {
+            resizeDown();
+        }
         if (ssize == 0) {
             return null;
         }
         T tmp = value[head];
-        head++;
-        if (head >= 8) {
+        if (head + 1 == length) {
             head = 0;
+        }
+        else {
+            head++;
         }
         ssize--;
         return tmp;
     }
     public T removeLast() {
+        if (length >= 16 && length / ssize >= 4) {
+            resizeDown();
+        }
         if (ssize == 0) {
             return null;
         }
         tail--;
+        if (tail < 0) {
+            tail = length - 1;
+        }
         ssize--;
         return value[tail];
     }

@@ -1,4 +1,4 @@
-class LinkedListDeque<T> {
+public class LinkedListDeque<T> {
     private Node sentinel;
     private int ssize;
     class Node {
@@ -78,7 +78,7 @@ class LinkedListDeque<T> {
         }
         return node.value;
     }
-    public T recursiveHelper(int index, Node node) {
+    private T recursiveHelper(int index, Node node) {
         if (index == 0) {
             return node.value;
         }
