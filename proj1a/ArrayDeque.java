@@ -69,11 +69,9 @@ public class ArrayDeque<T> {
             resizeUp();
         }
         value[tail] = item;
-        if (tail + 1 == length) {
+        tail++;
+        if (tail == length) {
             tail = 0;
-        }
-        else {
-            tail++;
         }
         ssize++;
     }
@@ -101,11 +99,9 @@ public class ArrayDeque<T> {
             return null;
         }
         T tmp = value[head];
-        if (head + 1 == length) {
+        head++;
+        if (head == length) {
             head = 0;
-        }
-        else {
-            head++;
         }
         ssize--;
         return tmp;
@@ -131,7 +127,7 @@ public class ArrayDeque<T> {
         int node = head;
         for (int i = 0; i < index; i++) {
             node++;
-            if (node >= 8) {
+            if (node == length) {
                 node = 0;
             }
         }
