@@ -1,12 +1,12 @@
-class LinkedListDeque<Item> {
+class LinkedListDeque<T> {
     private Node sentinel;
     private int ssize;
     class Node {
-        private Item value;
+        private T value;
         private Node pre;
         private Node next;
-        public Node(Item item, Node pre, Node next) {
-            value = item;
+        public Node(T T, Node pre, Node next) {
+            value = T;
             this.pre = pre;
             this.next = next;
         }
@@ -21,14 +21,14 @@ class LinkedListDeque<Item> {
         sentinel.next = sentinel;
         ssize = 0;
     }
-    public void addFirst(Item item) {
-        Node node = new Node(item, sentinel, sentinel.next);
+    public void addFirst(T T) {
+        Node node = new Node(T, sentinel, sentinel.next);
         node.next.pre = node;
         sentinel.next = node;
         ssize++;
     }
-    public void addLast(Item item) {
-        Node node = new Node(item, sentinel.pre, sentinel);
+    public void addLast(T T) {
+        Node node = new Node(T, sentinel.pre, sentinel);
         sentinel.pre.next = node;
         sentinel.pre = node;
         ssize++;
@@ -46,27 +46,27 @@ class LinkedListDeque<Item> {
             node = node.next;
         }
     }
-    public Item removeFirst() {
+    public T removeFirst() {
         if (size() == 0) {
             return null;
         }
-        Item ret = sentinel.next.value;
+        T ret = sentinel.next.value;
         sentinel.next.next.pre = sentinel;
         sentinel.next = sentinel.next.next;
         ssize--;
         return ret;
     }
-    public Item removeLast() {
+    public T removeLast() {
         if (size() == 0) {
             return null;
         }
-        Item ret = sentinel.pre.value;
+        T ret = sentinel.pre.value;
         sentinel.pre.pre.next = sentinel;
         sentinel.pre = sentinel.pre.pre;
         ssize--;
         return ret;
     }
-    public Item get(int index) {
+    public T get(int index) {
         if (index >= size()) {
             return null;
         }
@@ -78,13 +78,13 @@ class LinkedListDeque<Item> {
         }
         return node.value;
     }
-    public Item recursiveHelper(int index, Node node) {
+    public T recursiveHelper(int index, Node node) {
         if (index == 0) {
             return node.value;
         }
         return recursiveHelper(index - 1, node.next);
     }
-    public Item getRecursive(int index) {
+    public T getRecursive(int index) {
         if (index >= size()) {
             return null;
         }

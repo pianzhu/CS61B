@@ -1,17 +1,17 @@
-public class ArrayDeque<Item> {
-    private Item[] value;
+public class ArrayDeque<T> {
+    private T[] value;
     private int ssize;
     private int head;
     private int length;
     private int tail;
     public ArrayDeque() {
-        value = (Item[])new Object[8];
+        value = (T[]) new Object[8];
         ssize = 0;
         head = 0;
         tail = 0;
         length = 8;
     }
-    public void addFirst(Item item) {
+    public void addFirst(T item) {
         if (ssize > length) {
             return;
         }
@@ -22,7 +22,7 @@ public class ArrayDeque<Item> {
         value[head] = item;
         ssize++;
     }
-    public void addLast(Item item) {
+    public void addLast(T item) {
         if (ssize > length) {
             return;
         }
@@ -41,7 +41,7 @@ public class ArrayDeque<Item> {
     }
     public void printDeque() {
         int node = head;
-        while(node != tail) {
+        while (node != tail) {
             System.out.print(value[node] + " ");
             node++;
             if (node >= 8) {
@@ -49,11 +49,11 @@ public class ArrayDeque<Item> {
             }
         }
     }
-    public Item removeFirst() {
-        if (ssize ==0) {
+    public T removeFirst() {
+        if (ssize == 0) {
             return null;
         }
-        Item tmp = value[head];
+        T tmp = value[head];
         head++;
         if (head >= 8) {
             head = 0;
@@ -61,17 +61,20 @@ public class ArrayDeque<Item> {
         ssize--;
         return tmp;
     }
-    public Item removeLast() {
-        if (size()==0) {
+    public T removeLast() {
+        if (ssize == 0) {
             return null;
         }
         tail--;
         ssize--;
         return value[tail];
     }
-    public Item get(int index) {
+    public T get(int index) {
+        if (index >= ssize) {
+            return null;
+        }
         int node = head;
-        for (int i = 0; i <= index; i++) {
+        for (int i = 0; i < index; i++) {
             node++;
             if (node >= 8) {
                 node = 0;
