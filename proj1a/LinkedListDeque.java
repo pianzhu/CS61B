@@ -1,0 +1,93 @@
+class LinkedListDeque<Item> {
+    private Node sentinel;
+    private int ssize;
+    class Node {
+        private Item value;
+        private Node pre;
+        private Node next;
+        public Node(Item item, Node pre, Node next) {
+            value = item;
+            this.pre = pre;
+            this.next = next;
+        }
+        public Node(Node pre, Node next) {
+            this.pre = pre;
+            this.next = next;
+        }
+    }
+    public LinkedListDeque() {
+        sentinel = new Node(null, null);
+        sentinel.pre = sentinel;
+        sentinel.next = sentinel;
+        ssize = 0;
+    }
+    public void addFirst(Item item) {
+        Node node = new Node(item, sentinel, sentinel.next);
+        node.next.pre = node;
+        sentinel.next = node;
+        ssize++;
+    }
+    public void addLast(Item item) {
+        Node node = new Node(item, sentinel.pre, sentinel);
+        sentinel.pre.next = node;
+        sentinel.pre = node;
+        ssize++;
+    }
+    public boolean isEmpty() {
+        return ssize == 0;
+    }
+    public int size() {
+        return ssize;
+    }
+    public void printDeque() {
+        Node node = sentinel.next;
+        while (node != sentinel) {
+            System.out.print(node.value + " ");
+            node = node.next;
+        }
+    }
+    public Item removeFirst() {
+        if (size() == 0) {
+            return null;
+        }
+        Item ret = sentinel.next.value;
+        sentinel.next.next.pre = sentinel;
+        sentinel.next = sentinel.next.next;
+        ssize--;
+        return ret;
+    }
+    public Item removeLast() {
+        if (size() == 0) {
+            return null;
+        }
+        Item ret = sentinel.pre.value;
+        sentinel.pre.pre.next = sentinel;
+        sentinel.pre = sentinel.pre.pre;
+        ssize--;
+        return ret;
+    }
+    public Item get(int index) {
+        if (index >= size()) {
+            return null;
+        }
+        Node node = sentinel;
+        int i = 0;
+        while (i <= index) {
+            node = node.next;
+            i++;
+        }
+        return node.value;
+    }
+    public Item recursiveHelper(int index, Node node) {
+        if (index == 0) {
+            return node.value;
+        }
+        return recursiveHelper(index - 1, node.next);
+    }
+    public Item getRecursive(int index) {
+        if (index >= size()) {
+            return null;
+        }
+        return recursiveHelper(index, sentinel.next);
+    }
+}
