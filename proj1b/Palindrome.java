@@ -41,9 +41,9 @@ public class Palindrome {
         if (word == null || word.length() <= 1) {
             return true;
         }
-        int size = word.length();
-        for (int i = 0; i < size / 2; i++) {
-            if (!cc.equalChars(word.charAt(i), word.charAt(size - 1 - i))) {
+        int len = word.length();
+        for (int i = 0; i < len / 2; i++) {
+            if (!cc.equalChars(word.charAt(i), word.charAt(len - i - 1))) {
                 return false;
             }
         }
