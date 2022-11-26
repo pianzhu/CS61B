@@ -8,7 +8,8 @@ public class Palindrome {
         array.printDeque();
         return array;
     }
-    private boolean recursiveHelper(ArrayDeque<Character> arrayDeque1, ArrayDeque<Character> arrayDeque2) {
+    private boolean recursiveHelper(ArrayDeque<Character> arrayDeque1,
+                                    ArrayDeque<Character> arrayDeque2) {
         if (arrayDeque1.size() == 0) {
             return true;
         }
