@@ -17,18 +17,23 @@ public class TestPalindrome {
     }
     // Uncomment this class once you've created your Palindrome class.
     @Test
-    public void testisPalindrome() {
-        assertTrue(palindrome.isPalindrome("racecar"));
-        assertFalse(palindrome.isPalindrome("horse"));
-        assertTrue(palindrome.isPalindrome(""));
+    public void testIsPalindrome() {
         assertTrue(palindrome.isPalindrome("a"));
+        assertTrue(palindrome.isPalindrome("racecar"));
+        assertTrue(palindrome.isPalindrome("noon"));
+        assertFalse(palindrome.isPalindrome("horse"));
+        assertFalse(palindrome.isPalindrome("rancor"));
+        assertFalse(palindrome.isPalindrome("aaaaab"));
     }
+
     @Test
-    public void testIsOffByOnePalindrome() {
-        CharacterComparator cc = new OffByOne();
-        assertTrue(palindrome.isPalindrome("flake", cc));
-        assertFalse(palindrome.isPalindrome("aba", cc));
-        assertFalse(palindrome.isPalindrome("zA", cc));
-        assertTrue(palindrome.isPalindrome("a", cc));
+    public void testIsPalindromeUsingOffByOne() {
+        OffByOne obo = new OffByOne();
+        assertTrue(palindrome.isPalindrome("a", obo));
+        assertTrue(palindrome.isPalindrome("racedbq", obo));
+        assertTrue(palindrome.isPalindrome("nonm", obo));
+        assertFalse(palindrome.isPalindrome("horse", obo));
+        assertFalse(palindrome.isPalindrome("rancor", obo));
+        assertFalse(palindrome.isPalindrome("aaaaab", obo));
     }
 }
