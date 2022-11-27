@@ -12,7 +12,7 @@ public class Palindrome {
         if (d.size() <= 1) {
             return true;
         }
-        if (d.removeFirst() != d.removeFirst()) {
+        if (d.removeFirst() != d.removeLast()) {
             return false;
         }
         return recursiveHelper(d);
