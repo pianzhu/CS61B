@@ -46,6 +46,18 @@ public class ArrayRingBuffer<T>  extends AbstractBoundedQueue<T> {
         if (last == capacity) {
             last = 0;
         }
+        /* try-catch
+        try {
+            fillCount++;
+            rb[last] = x;
+            last ++;
+            if (last == capacity) {
+                last = 0;
+            }
+        } catch (RuntimeException e) {
+            throw new RuntimeException("Ring buffer overflow");
+        }
+        */
     }
 
     /**
